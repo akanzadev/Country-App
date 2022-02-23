@@ -1,0 +1,9 @@
+<div class="animate__animated animate__fadeIn">
+  <app-menu
+    [errorText]="onError"
+    [type]="'Country'"
+    (term)="onSubmit($event)"
+    (handleDebounce)="onDebounce($event)"
+  ></app-menu>
+  <app-results [countries]="countries"></app-results>
+</div>

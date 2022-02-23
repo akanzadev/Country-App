@@ -1,0 +1,83 @@
+<div *ngIf="countries.length !== 0" class="w-full p-4 flex flex-col animate__animated animate__fadeIn">
+  <!-- *ngIf="countries.length !== 0; else noSearch" -->
+  <div class="overflow-x-auto">
+    <div class="inline-block py-2 min-w-full">
+      <div class="overflow-hidden shadow-md sm:rounded-lg">
+        <table class="min-w-full">
+          <thead class="bg-gray-100 dark:bg-gray-700">
+            <tr>
+              <th
+                scope="col"
+                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+              >
+                #
+              </th>
+              <th
+                scope="col"
+                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+              >
+                Bandera
+              </th>
+              <th
+                scope="col"
+                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+              >
+                Nombre
+              </th>
+              <th
+                scope="col"
+                class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
+              >
+                Población
+              </th>
+              <th scope="col" class="relative py-3 px-6">
+                <span class="sr-only">Edit</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700
+              animate__animated animate__fadeIn animate__faster"
+              *ngFor="let country of countries; index as i"
+            >
+              <td
+                class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+              >
+                {{ i + 1 }}
+              </td>
+              <td
+                class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+              >
+                <img [src]="country.flags.svg" width="60" />
+              </td>
+              <td
+                class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+              >
+                {{ country.capital }}, {{ country.name.official }}
+              </td>
+              <td
+                class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
+              >
+                {{ country.population }}
+              </td>
+              <td
+                class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
+              >
+                <a
+                  [routerLink]="['../country', country.cca2]"
+                  class="text-blue-600 dark:text-blue-500 hover:underline"
+                  >Ver</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <ng-template #noSearch>
+  <div class="w-full p-4 flex flex-col">No hay Busquedas</div>
+</ng-template> -->

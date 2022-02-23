@@ -1,0 +1,37 @@
+<!-- <app-menu
+  [errorText]="onError"
+  [type]="'Region'"
+  (term)="onSubmit($event)"
+></app-menu>
+<app-results [countries]="countries"></app-results> -->
+
+<div class="m-4 p-5 bg-slate-800 text-white animate__animated animate__fadeIn">
+  <h1 class="text-4xl py-5">
+    Search by Region:
+    <strong class="font-normal">
+      {{ regionActive | titlecase }}</strong
+    >
+  </h1>
+  <hr />
+  <h2 class="text-3xl py-5">Select the Region</h2>
+  <ul class="flex flex-row flex-wrap gap-4 py-4">
+    <li *ngFor="let region of regions" class="">
+      <!-- [class.bg-slate-900]="regionActive === region" -->
+      <!-- [ngClass]="{
+        'bg-slate-900': regionActive === region,
+        'bg-slate-500': regionActive !== region
+      }" -->
+      <!-- [class]="regionActive === region ? 'bg-slate-900' : 'bg-slate-500'" -->
+
+      <button
+        class="block rounded-md py-2 px-3 cursor-pointer text-2xl hover:bg-slate-900 transition-all"
+        [class]="getClassCss(region)"
+        (click)="activeRegion(region)"
+        type="button"
+      >
+        {{ region | titlecase }}
+      </button>
+    </li>
+  </ul>
+  <app-results [countries]="countries"></app-results>
+</div>

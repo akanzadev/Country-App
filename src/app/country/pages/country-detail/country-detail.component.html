@@ -1,0 +1,83 @@
+<!-- Alert-->
+<div class="w-full p-3 animate__animated animate__fadeIn">
+  <div
+    *ngIf="!country; else countryDetail"
+    class="w-full bg-cyan-700 p-5 text-center"
+  >
+    <span class="text-xl text-white font-semibold">
+      Espere mientras carga...</span
+    >
+  </div>
+
+  <ng-template #countryDetail>
+    <div class="w-full p-5 bg-slate-800 text-white">
+      <div class="w-full">
+        <h1 class="text-5xl text-center font-semibold py-4">
+          {{ country.name.official }}
+        </h1>
+      </div>
+      <div class="flex flex-row py-6 content-start">
+        <div class="flex-1 flex flex-col space-y-4 items-center">
+          <h2 class="w-full text-center text-3xl font-semibold pb-3">Flag</h2>
+          <div class="w-full flex justify-around">
+            <img
+              [src]="country.flags.svg"
+              alt=""
+              class="h-48 drop-shadow-[0_20px_20px_rgba(255,255,0,0.25)]"
+            />
+            <img
+              [src]="country.coatOfArms.svg"
+              alt=""
+              class="h-48 drop-shadow-[0_20px_20px_rgba(255,255,0,0.25)]"
+            />
+          </div>
+        </div>
+        <div class="flex-1">
+          <h3 class="text-3xl font-semibold pb-3">Information</h3>
+          <ul class="flex flex-col space-y-3 lg:justify-center">
+            <li class="text-xl">
+              <strong class="text-2xl">Population: </strong
+              >{{ country.population | number }}
+            </li>
+            <li class="text-xl">
+              <strong class="text-2xl">Capital: </strong>{{ country.capital }}
+            </li>
+            <li class="text-xl">
+              <strong class="text-2xl">Region: </strong>{{ country.region }}
+            </li>
+            <li class="text-xl">
+              <strong class="text-2xl">Subregion: </strong
+              >{{ country.subregion }}
+            </li>
+            <li class="text-xl">
+              <strong class="text-2xl">Languages: </strong>{{ languages }}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="w-full">
+        <h3 class="text-3xl font-semibold pb-3">Translations</h3>
+        <ul class="flex flex-row gap-2 flex-wrap py-4">
+          <li
+            class="bg-sky-900 rounded-lg"
+            *ngFor="let translation of translations"
+          >
+            <strong class="text-lg text-white py-2 px-4">{{
+              translation.official
+            }}</strong>
+          </li>
+        </ul>
+      </div>
+      <div class="w-full">
+        <iframe
+          [src]="googleMapsUrl"
+          width="100%"
+          height="450"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </ng-template>
+</div>
