@@ -1,6 +1,10 @@
 <section class="w-full p-4">
   <h2 class="text-3xl text-gray-800">By {{ type }}</h2>
-  <form class="py-5 w-full" (ngSubmit)="onSubmit()" [formGroup]="countryForm">
+  <form
+    class="my-5 w-full relative"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="countryForm"
+  >
     <input
       [name]="type"
       [placeholder]="type"
@@ -10,6 +14,44 @@
       autocomplete="off"
       class="w-full rounded-md py-2 px-2 text-xl border-gray-800 outline-none shadow-md shadow-gray-600"
     />
+    <ul
+      *ngIf="suggestions.length > 0"
+      class="z-20 absolute w-full bg-slate-800 divide-y divide-gray-200 dark:divide-gray-700"
+      role="list"
+    >
+      <li *ngFor="let sugestion of suggestions" class="px-4 hover:bg-slate-700">
+        <a
+          class="py-3 sm:py-4 flex items-center space-x-4 cursor-pointer"
+          [routerLink]="['../country', sugestion.cca2]"
+        >
+          <div class="flex-shrink-0">
+            <img class="w-8" [src]="sugestion.flags.svg" alt="Country Img" />
+          </div>
+          <div class="flex-1 min-w-0">
+            <p
+              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+            >
+              Name: {{ sugestion.name.official }}
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              Region: {{ sugestion.region }}
+            </p>
+          </div>
+        </a>
+      </li>
+      <li class="px-4 hover:bg-slate-700">
+        <a class="py-3 sm:py-4 flex items-center space-x-4 cursor-pointer">
+          <div class="w-full">
+            <p
+              (click)="onSubmit()"
+              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+            >
+              Search more results with term "{{ countryForm.value.term }}"
+            </p>
+          </div>
+        </a>
+      </li>
+    </ul>
     <label
       *ngIf="
         countryForm.get('term')?.touched &&

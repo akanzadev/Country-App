@@ -16,6 +16,7 @@ import { Country } from '../../models/country-name';
 export class ByCountryComponent {
   countries: Country[] = [];
   onError = '';
+  suggestions: Country[] = [];
   constructor(private countryService: CountryService) {}
 
   onSubmit(term: string) {
@@ -23,14 +24,25 @@ export class ByCountryComponent {
       next: (countries) => {
         this.countries = countries;
         this.onError = '';
+        this.suggestions = [];
       },
       error: (error) => {
         this.onError = error;
+        this.suggestions = [];
       },
     });
   }
 
-  onDebounce(e: string) {
-    this.onError = '';
+  onDebounce(term: string) {
+    this.countryService.getByName(term).subscribe({
+      next: (countries) => {
+        this.onError = '';
+        this.suggestions = countries.slice(0, 5);
+      },
+      error: (error) => {
+        this.onError = error;
+        this.suggestions = [];
+      },
+    });
   }
 }

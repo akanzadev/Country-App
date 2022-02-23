@@ -4,6 +4,7 @@
     [type]="'Country'"
     (term)="onSubmit($event)"
     (handleDebounce)="onDebounce($event)"
+    [suggestions]="suggestions"
   ></app-menu>
   <app-results [countries]="countries"></app-results>
 </div>
